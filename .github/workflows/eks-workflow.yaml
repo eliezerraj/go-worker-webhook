@@ -110,7 +110,7 @@ jobs:
       - name: Configure AWS credentials - OIDC
         uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::908671954593:role/oidc-gitaction
+          role-to-assume: ${{ secrets.AWS_OIDC_ROLE }}
           aws-region: ${{ needs.setup-environment.outputs.AWS_REGION }}
 
       - name: Sts GetCallerIdentity
