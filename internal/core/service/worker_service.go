@@ -99,19 +99,21 @@ func (s *WorkerService) InsertWebHook(ctx context.Context, webhook *model.WebHoo
 
 	res, err := s.workerRepository.GetSetupWebHook(ctx, *webhook)
 	if err != nil {
-		childLogger.Error().Err(err).Send()
-		return nil, err
+		childLogger.Info().Err(err).Send()
+		webhook.Status = "IN-QUEUE:MSG-DISCARDED-NO-WEBHOOK-SETUP"
+	} else {
+		webhook.Status = "IN-QUEUE:WAITING-FOR-SEND"
+		webhook.ID = res.ID
+		webhook.Receiver = res.Receiver
+		webhook.Host = res.Host
+		webhook.Url = res.Url
+		webhook.Method = res.Method
 	}
-	webhook.ID = res.ID
-	webhook.Receiver = res.Receiver
-	webhook.Host = res.Host
-	webhook.Url = res.Url
-	webhook.Method = res.Method
 
 	// ------------------------  STEP-2 ----------------------------------//
 	childLogger.Info().Str("func","InsertWebHook").Msg("===> STEP - 02 (INSERT WEBHOOK) <===")
 
-	webhook.Status = "IN-QUEUE:WAITING-FOR-SEND"
+	//webhook.Status = "IN-QUEUE:WAITING-FOR-SEND"
 	res, err = s.workerRepository.InsertWebHook(ctx, tx, *webhook)
 	if err != nil {
 		return nil, err
