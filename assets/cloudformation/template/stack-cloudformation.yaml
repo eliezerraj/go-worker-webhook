@@ -55,6 +55,8 @@ Resources:
                     }
                   }
                 }
+              ]
+            }
         - eksId: !Select [4, !Split ["/", !Ref providerURL]]
           eksEndpoint: !Select [1, !Split ["//", !Ref providerURL]]
       Policies:
