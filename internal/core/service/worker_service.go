@@ -38,7 +38,7 @@ func NewWorkerService(	goCoreRestApiService	go_core_api.ApiService,
 }
 
 // About handle/convert http status code
-func errorStatusCode(statusCode int, serviceName string) error{
+func errorStatusCode(statusCode int, serviceName string, msg_err error) error{
 	childLogger.Info().Str("func","errorStatusCode").Interface("serviceName", serviceName).Interface("statusCode", statusCode).Send()
 	var err error
 	switch statusCode {
@@ -49,7 +49,7 @@ func errorStatusCode(statusCode int, serviceName string) error{
 		case http.StatusNotFound:
 			err = erro.ErrNotFound
 		default:
-			err = errors.New(fmt.Sprintf("service %s in outage", serviceName))
+			err = errors.New(fmt.Sprintf("service %s in outage => cause error: %s", serviceName, msg_err.Error() ))
 		}
 	return err
 }
@@ -170,7 +170,7 @@ func (s *WorkerService) SendWebHook(ctx context.Context, webhook *model.WebHook)
 													httpClient, 
 													webhook.Payload)
 	if err != nil {
-		childLogger.Error().Err(err).Interface("error",errorStatusCode(statusCode, webhook.Host)).Send()
+		childLogger.Error().Err(err).Interface("error",errorStatusCode(statusCode, webhook.Host, err)).Send()
 	}
 
 	// setting status
