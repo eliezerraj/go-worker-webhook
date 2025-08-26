@@ -6,8 +6,8 @@ metadata:
   labels:
     app: *app-name
 data:
-  API_VERSION: "1.0"
-  POD_NAME: "go-worker-webhook.k8"
+  API_VERSION: "3.3"
+  POD_NAME: "go-worker-webhook.arch-eks-02"
   DB_HOST: "rds-proxy-db-arch-02.proxy-cj4aqa08ettf.us-east-2.rds.amazonaws.com"
   DB_PORT: "5432"
   DB_NAME: "postgres"
