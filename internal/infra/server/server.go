@@ -160,13 +160,13 @@ func (s *ServerWorker) SendWebhook(ctx context.Context, appServer *model.AppServ
 			childLogger.Info().Msg("**** Worker Shutting !!!")
 			return
 		case <-time.After(time.Second):
-			childLogger.Info().Str("func","SendWebhook").Msg("====> SENDING ...")
+			childLogger.Debug().Str("func","SendWebhook").Msg("====> SENDING ...")
 		}
 
 		// get all webhook waiting fo sending
 		res_webhook, err := s.workerService.GetWebHook(ctx, &webhook)
 		if err != nil {
-			childLogger.Info().Interface("error",err).Msg("NO WEBHOOK TO SEND !!!")
+			childLogger.Debug().Interface("error",err).Msg("NO WEBHOOK TO SEND !!!")
 		} else {
 			// send the webhook
 			_, err = s.workerService.SendWebHook(ctx, res_webhook)
