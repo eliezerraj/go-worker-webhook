@@ -201,7 +201,7 @@ func (s *WorkerService) SendWebHook(ctx context.Context, webhook *model.WebHook)
 
 // About get all webhook to send 
 func (s *WorkerService) GetWebHook(ctx context.Context, webhook *model.WebHook) (*model.WebHook, error){
-	childLogger.Info().Str("func","GetWebHook").Send()
+	childLogger.Debug().Str("func","GetWebHook").Send()
 	
 	webhook, err := s.workerRepository.GetWebHook(ctx, webhook)
 	if err != nil {

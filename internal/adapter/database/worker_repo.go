@@ -120,7 +120,7 @@ func (w WorkerRepository) GetSetupWebHook(ctx context.Context, webhook model.Web
 
 // About get all webhook waiting for sending
 func (w WorkerRepository) GetWebHook(ctx context.Context, webhook *model.WebHook) (*model.WebHook, error){
-	childLogger.Info().Str("func","GetWebHook").Interface("trace-resquest-id", ctx.Value("trace-request-id")).Send()
+	childLogger.Info().Debug("func","GetWebHook").Interface("trace-resquest-id", ctx.Value("trace-request-id")).Send()
 
 	span := tracerProvider.Span(ctx, "database.GetWebHook")
 	defer span.End()
