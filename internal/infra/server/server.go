@@ -152,7 +152,7 @@ func (s *ServerWorker) SendWebhook(ctx context.Context, appServer *model.AppServ
 	}()
 
 	webhook := model.WebHook{Status: "IN-QUEUE:WAITING-FOR-SEND"}
-	ts := 10 // sleep time
+	ts := 60 // sleep time
 
 	for {
 		select {
