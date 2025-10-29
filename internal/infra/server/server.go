@@ -15,7 +15,7 @@ import (
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
 	"go.opentelemetry.io/otel/propagation"
-	"go.opentelemetry.io/contrib/propagators/aws/xray"
+	//"go.opentelemetry.io/contrib/propagators/aws/xray"
 
 	"github.com/confluentinc/confluent-kafka-go/v2/kafka"
 
@@ -78,7 +78,7 @@ func (s *ServerWorker) Consumer(ctx context.Context, appServer *model.AppServer,
 											&infoTrace)
 	
 	if tp != nil {
-		otel.SetTextMapPropagator(xray.Propagator{})
+		otel.SetTextMapPropagator(propagation.TraceContext{})
 		otel.SetTracerProvider(tp)
 		tracer = tp.Tracer(appServer.InfoPod.PodName)
 	}
