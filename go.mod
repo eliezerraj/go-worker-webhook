@@ -6,7 +6,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.29.17
 	github.com/aws/aws-sdk-go-v2/feature/ec2/imds v1.16.32
 	github.com/confluentinc/confluent-kafka-go/v2 v2.11.0
-	github.com/eliezerraj/go-core v1.0.85
+	github.com/eliezerraj/go-core v1.0.87
 	github.com/google/uuid v1.6.0
 	github.com/jackc/pgx/v5 v5.7.5
 	github.com/joho/godotenv v1.5.1
