@@ -1,6 +1,6 @@
 #docker build -t go-worker-webhook .
 
-FROM golang:1.23.3 As builder
+FROM golang:1.24 As builder
 
 RUN apt-get update && apt-get install bash && apt-get install -y --no-install-recommends ca-certificates
 
